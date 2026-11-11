@@ -1,0 +1,74 @@
+/* ==========================================================
+   Buttons
+   Pressed states give the "native button" feel on touch screens.
+   ========================================================== */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 50px;
+  padding: 12px 20px;
+  border-radius: var(--radius);
+  border: 1px solid transparent;
+  font-weight: 600;
+  font-size: 16px;
+  transition: transform 0.12s ease, filter 0.12s ease, opacity 0.2s ease, background 0.2s ease;
+}
+
+/* Pressed: a quick "sink" like a native button */
+.btn:active:not(:disabled) {
+  transform: scale(0.97);
+  filter: brightness(1.12);
+}
+
+.btn--block {
+  width: 100%;
+}
+
+.btn--lg {
+  min-height: 56px;
+  font-size: 17px;
+}
+
+.btn--primary {
+  background: linear-gradient(90deg, var(--primary), var(--primary-2));
+  box-shadow: var(--glow);
+}
+
+.btn--primary:disabled {
+  background: #26365c;
+  color: #7d89a6;
+  box-shadow: none;
+  cursor: not-allowed;
+}
+
+.btn--dark {
+  background: #0d1a35;
+  border-color: var(--border);
+}
+
+.btn--ghost {
+  background: transparent;
+  border-color: var(--border);
+  color: #c8d2e8;
+}
+
+.btn--outline {
+  flex: 1;
+  background: var(--surface);
+  border-color: var(--border);
+}
+
+.link-btn {
+  padding: 0;
+  border: 0;
+  background: none;
+  color: #6ea6ff;
+  font-weight: 600;
+}
+
+.link-btn--center {
+  align-self: center;
+}

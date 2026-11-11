@@ -1,0 +1,130 @@
+/* ==========================================================
+   Screen: upload
+   ========================================================== */
+
+/* Drop zone */
+.dropzone {
+  position: relative;
+  display: grid;
+  place-items: center;
+  min-height: 250px;
+  border-radius: var(--radius-lg);
+  border: 2px dashed rgba(110, 166, 255, 0.45);
+  background: rgba(47, 123, 255, 0.05);
+  text-align: center;
+  cursor: pointer;
+  transition: border-color 0.2s ease, background 0.2s ease;
+  overflow: hidden;
+}
+
+.dropzone.is-over {
+  border-color: var(--primary);
+  background: rgba(47, 123, 255, 0.12);
+}
+
+.dropzone__empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: 24px;
+}
+
+.dropzone__icon {
+  display: grid;
+  place-items: center;
+  width: 72px;
+  height: 72px;
+  margin-bottom: 6px;
+  border-radius: 20px;
+  background: repeating-linear-gradient(135deg, rgba(47, 123, 255, 0.22) 0 6px, rgba(47, 123, 255, 0.12) 6px 12px);
+}
+
+.chips {
+  display: flex;
+  gap: 8px;
+  margin-top: 4px;
+}
+
+.chip {
+  padding: 3px 12px;
+  border-radius: 999px;
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  font-size: 12px;
+  font-weight: 600;
+  color: #c8d2e8;
+}
+
+.dropzone__preview {
+  display: none;
+  position: absolute;
+  inset: 0;
+}
+
+.dropzone.has-image {
+  border-style: solid;
+  border-color: rgba(110, 166, 255, 0.35);
+}
+
+.dropzone.has-image .dropzone__empty {
+  visibility: hidden;
+}
+
+.dropzone.has-image .dropzone__preview {
+  display: block;
+}
+
+.dropzone__preview #preview-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.remove-btn {
+  position: absolute;
+  top: 12px;
+  inset-inline-end: 12px;
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  border: 0;
+  border-radius: 50%;
+  background: var(--danger);
+  box-shadow: 0 4px 12px rgba(239, 68, 68, 0.45);
+}
+
+.ready-pill {
+  position: absolute;
+  bottom: 12px;
+  inset-inline-start: 12px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 12px;
+  border-radius: 999px;
+  background: var(--success);
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.samples {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+}
+
+.sample {
+  padding: 5px 14px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.sample:hover {
+  border-color: var(--primary);
+}

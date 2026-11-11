@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>فحص المركبات بالذكاء الاصطناعي | AI Vehicle Inspection</title>
+  <meta name="description" content="AI Vehicle Inspection – upload a vehicle photo and get an instant condition report. Arabic and English.">
+  <meta name="author" content="Fay Naif">
+  <meta name="theme-color" content="#0b1730">
+  <meta name="color-scheme" content="dark">
+
+  <!-- Installable app (PWA) -->
+  <link rel="manifest" href="manifest.webmanifest">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="Vehicle AI">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <link rel="apple-touch-icon" href="assets/icons/app/apple-touch-icon.png">
+  <link rel="icon" href="assets/images/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="assets/icons/app/favicon-32.png" sizes="32x32" type="image/png">
+
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/print.css" media="print">
+</head>
+<body>
+  <!-- Phone frame: only drawn on wide screens (see css/device-frame.css) -->
+  <div class="device">
+    <span class="device__button device__button--action" aria-hidden="true"></span>
+    <span class="device__button device__button--vol-up" aria-hidden="true"></span>
+    <span class="device__button device__button--vol-down" aria-hidden="true"></span>
+    <span class="device__button device__button--power" aria-hidden="true"></span>
+    <div class="device__screen" id="device-screen">
+      <div class="device__status" aria-hidden="true">
+        <span class="device__time">9:41</span>
+        <span class="device__island"></span>
+        <span class="device__icons">
+          <svg width="18" height="12" viewBox="0 0 18 12"><rect x="0" y="8" width="3" height="4" rx="1"/><rect x="5" y="5.5" width="3" height="6.5" rx="1"/><rect x="10" y="3" width="3" height="9" rx="1"/><rect x="15" y="0" width="3" height="12" rx="1"/></svg>
+          <svg width="16" height="12" viewBox="0 0 16 12"><path d="M8 2.2c2.3 0 4.4.9 6 2.4l1.3-1.3A10.3 10.3 0 0 0 8 .3 10.3 10.3 0 0 0 .7 3.3L2 4.6a8.4 8.4 0 0 1 6-2.4zm0 3.7c1.3 0 2.5.5 3.4 1.3l1.3-1.3A6.6 6.6 0 0 0 8 4a6.6 6.6 0 0 0-4.7 1.9l1.3 1.3c.9-.8 2.1-1.3 3.4-1.3zM8 9.6l2-2a2.8 2.8 0 0 0-4 0z"/></svg>
+          <span class="device__battery"><span></span></span>
+        </span>
+      </div>
+
+      <div class="app" id="app">
+
+        <!-- Screen 1: splash -->
+        <section class="screen screen--splash is-active" id="screen-splash" data-screen="splash" aria-labelledby="splash-title">
+          <header class="screen-top">
+            <img class="logo" src="assets/images/logo.svg" alt="AI" width="44" height="44">
+            <div class="screen-top__end">
+              <button class="lang-btn lang-btn--accent" type="button" data-action="install" hidden>
+                <img src="assets/icons/download.svg" alt="" width="18" height="18">
+                <span data-i18n="install.button"></span>
+              </button>
+              <button class="lang-btn" type="button" data-action="toggle-lang">
+                <img src="assets/icons/globe.svg" alt="" width="18" height="18">
+                <span data-i18n="lang.switch">English</span>
+              </button>
+            </div>
+          </header>
+          <div class="splash-body">
+            <h1 class="brand-title" id="splash-title">Vehicle AI</h1>
+            <p class="lead" data-i18n="splash.subtitle"></p>
+            <figure class="hero-photo">
+              <img src="assets/images/hero-vehicles.jpg" alt="" width="940" height="720">
+            </figure>
+          </div>
+          <div class="slide-start" id="slide-start" role="button" tabindex="0" data-i18n-aria="splash.hint">
+            <span class="slide-start__fill" id="slide-fill"></span>
+            <span class="slide-start__knob" id="slide-knob">
+              <img class="slide-start__arrow" src="assets/icons/chevron.svg" alt="" width="22" height="22">
+              <img class="slide-start__check" src="assets/icons/check-green.svg" alt="" width="24" height="24">
+            </span>
+            <span class="slide-start__label" data-i18n="splash.start"></span>
+            <span class="slide-start__label slide-start__label--done" data-i18n="splash.done"></span>
+          </div>
+        </section>
+
+        <!-- Screen 2: login / register -->
+        <section class="screen screen--login" id="screen-login" data-screen="login" aria-labelledby="login-title">
+          <header class="screen-top">
+            <img class="logo" src="assets/images/logo.svg" alt="AI" width="44" height="44">
+            <button class="lang-btn" type="button" data-action="toggle-lang">
+              <img src="assets/icons/globe.svg" alt="" width="18" height="18">
+              <span data-i18n="lang.switch">English</span>
+            </button>
+          </header>
+          <div class="login-head">
+            <h2 class="screen-title" id="login-title" data-i18n="login.title"></h2>
+            <p class="muted" id="login-subtitle" data-i18n="login.subtitle"></p>
+          </div>
+          <figure class="hero-photo hero-photo--small">
+            <img src="assets/images/hero-vehicles.jpg" alt="" width="940" height="720">
+          </figure>
+          <form class="form" id="login-form" novalidate>
+            <label class="field is-hidden" id="field-name">
+              <span class="field__label" data-i18n="login.name"></span>
+              <span class="field__box">
+                <img src="assets/icons/user.svg" alt="" width="20" height="20">
+                <input type="text" name="name" autocomplete="name">
+              </span>
+            </label>
+            <label class="field">
+              <span class="field__label" data-i18n="login.email"></span>
+              <span class="field__box">
+                <img src="assets/icons/mail.svg" alt="" width="20" height="20">
+                <input type="email" name="email" autocomplete="email" placeholder="name@example.com" dir="ltr">
+              </span>
+            </label>
+            <label class="field">
+              <span class="field__label" data-i18n="login.password"></span>
+              <span class="field__box">
+                <img src="assets/icons/lock.svg" alt="" width="20" height="20">
+                <input type="password" name="password" autocomplete="current-password" placeholder="••••••••" dir="ltr">
+              </span>
+            </label>
+            <p class="form-error" id="login-error" role="alert"></p>
+            <button class="btn btn--primary btn--block" type="submit" id="login-submit" data-i18n="login.submit"></button>
+            <div class="divider"><span data-i18n="login.or"></span></div>
+            <button class="btn btn--ghost btn--block" type="button" data-action="guest" data-i18n="login.guest"></button>
+            <p class="switch-line">
+              <span id="switch-text" data-i18n="login.noAccount"></span>
+              <button class="link-btn" type="button" id="switch-mode" data-i18n="login.create"></button>
+            </p>
+          </form>
+        </section>
+
+        <!-- Screen 3: about the system -->
+        <section class="screen screen--about" id="screen-about" data-screen="about" aria-labelledby="about-title">
+          <header class="topbar">
+            <button class="topbar__home" type="button" data-goto="about">
+              <img src="assets/icons/home.svg" alt="" width="22" height="22">
+              <span data-i18n="nav.home"></span>
+            </button>
+            <div class="topbar__end">
+              <button class="icon-btn" type="button" data-action="toggle-lang" data-i18n-aria="lang.switch">
+                <img src="assets/icons/globe.svg" alt="" width="20" height="20">
+              </button>
+              <button class="icon-btn" type="button" data-action="install" data-i18n-aria="install.button" hidden>
+                <img src="assets/icons/download.svg" alt="" width="20" height="20">
+              </button>
+              <button class="icon-btn" type="button" data-action="logout" data-i18n-aria="nav.logout">
+                <img src="assets/icons/logout.svg" alt="" width="20" height="20">
+              </button>
+              <span class="ai-badge">AI</span>
+            </div>
+          </header>
+          <span class="pill"><span class="pill__dot"></span><span data-i18n="about.pill"></span></span>
+          <h2 class="screen-title" id="about-title" data-i18n="about.title"></h2>
+          <div class="card card--text">
+            <p data-i18n="about.text"></p>
+          </div>
+          <div class="feature-grid">
+            <article class="feature">
+              <span class="feature__icon feature__icon--orange"><img src="assets/icons/bolt.svg" alt="" width="26" height="26"></span>
+              <h3 data-i18n="about.f1.title"></h3>
+              <p data-i18n="about.f1.text"></p>
+            </article>
+            <article class="feature">
+              <span class="feature__icon"><img src="assets/icons/shield.svg" alt="" width="26" height="26"></span>
+              <h3 data-i18n="about.f2.title"></h3>
+              <p data-i18n="about.f2.text"></p>
+            </article>
+            <article class="feature">
+              <span class="feature__icon"><img src="assets/icons/chart.svg" alt="" width="26" height="26"></span>
+              <h3 data-i18n="about.f3.title"></h3>
+              <p data-i18n="about.f3.text"></p>
+            </article>
+            <article class="feature">
+              <span class="feature__icon feature__icon--pink"><img src="assets/icons/brain.svg" alt="" width="26" height="26"></span>
+              <h3 data-i18n="about.f4.title"></h3>
+              <p data-i18n="about.f4.text"></p>
+            </article>
+          </div>
+          <button class="btn btn--primary btn--block btn--lg" type="button" data-goto="upload" data-i18n="about.start"></button>
+        </section>
+
+        <!-- Screen 4: upload -->
+        <section class="screen screen--upload" id="screen-upload" data-screen="upload" aria-labelledby="upload-title">
+          <header class="topbar">
+            <button class="topbar__home" type="button" data-goto="about">
+              <img src="assets/icons/home.svg" alt="" width="22" height="22">
+              <span data-i18n="nav.home"></span>
+            </button>
+            <div class="topbar__end">
+              <button class="icon-btn" type="button" data-action="toggle-lang" data-i18n-aria="lang.switch">
+                <img src="assets/icons/globe.svg" alt="" width="20" height="20">
+              </button>
+              <span class="ai-badge">AI</span>
+            </div>
+          </header>
+          <h2 class="screen-title" id="upload-title" data-i18n="upload.title"></h2>
+          <p class="muted" data-i18n="upload.subtitle"></p>
+
+          <div class="dropzone" id="dropzone" tabindex="0">
+            <div class="dropzone__empty">
+              <span class="dropzone__icon"><img src="assets/icons/image.svg" alt="" width="34" height="34"></span>
+              <strong data-i18n="upload.drop"></strong>
+              <span class="muted" data-i18n="upload.or"></span>
+              <span class="chips"><span class="chip">JPG</span><span class="chip">PNG</span><span class="chip">WEBP</span></span>
+            </div>
+            <div class="dropzone__preview">
+              <img id="preview-img" alt="">
+              <button class="remove-btn" type="button" id="remove-img" data-i18n-aria="upload.remove">
+                <img src="assets/icons/close.svg" alt="" width="16" height="16">
+              </button>
+              <span class="ready-pill">
+                <img src="assets/icons/check.svg" alt="" width="14" height="14">
+                <span data-i18n="upload.ready"></span>
+              </span>
+            </div>
+          </div>
+          <input type="file" id="file-input" accept="image/jpeg,image/png,image/webp" hidden>
+          <p class="form-error" id="upload-error" role="alert"></p>
+
+          <div class="samples">
+            <span class="muted" data-i18n="upload.samples"></span>
+            <button class="sample" type="button" data-sample="assets/images/samples/truck.jpg" data-vehicle="truck" data-i18n="upload.sample.truck"></button>
+            <button class="sample" type="button" data-sample="assets/images/samples/sedan.jpg" data-vehicle="car" data-i18n="upload.sample.sedan"></button>
+            <button class="sample" type="button" data-sample="assets/images/samples/van.jpg" data-vehicle="car" data-i18n="upload.sample.van"></button>
+          </div>
+
+          <button class="btn btn--dark btn--block" type="button" id="choose-btn">
+            <img src="assets/icons/plus.svg" alt="" width="20" height="20" id="choose-icon">
+            <span data-i18n="upload.choose"></span>
+          </button>
+          <button class="btn btn--primary btn--block btn--lg" type="button" id="analyze-btn" disabled data-i18n="upload.analyze"></button>
+        </section>
+
+        <!-- Screen 5: report -->
+        <section class="screen screen--report" id="screen-report" data-screen="report" aria-labelledby="report-title">
+          <header class="topbar">
+            <button class="topbar__home" type="button" data-goto="about">
+              <img src="assets/icons/home.svg" alt="" width="22" height="22">
+              <span data-i18n="nav.home"></span>
+            </button>
+            <div class="topbar__end">
+              <button class="icon-btn" type="button" data-action="toggle-lang" data-i18n-aria="lang.switch">
+                <img src="assets/icons/globe.svg" alt="" width="20" height="20">
+              </button>
+              <span class="ai-badge">AI</span>
+            </div>
+          </header>
+          <h2 class="screen-title" id="report-title"></h2>
+          <p class="muted" data-i18n="report.subtitle"></p>
+
+          <article class="report-card" id="report-card">
+            <header class="report-card__head">
+              <div>
+                <strong class="report-brand">Vehicle AI</strong>
+                <span class="muted" data-i18n="report.brandSub"></span>
+              </div>
+              <span class="grade" id="report-grade"></span>
+            </header>
+
+            <div class="report-photo"><img id="report-img" alt=""></div>
+
+            <div class="score-card">
+              <span class="score-card__label" id="report-condition"></span>
+              <span class="score-card__value" id="report-score">0%</span>
+              <span class="meter"><span class="meter__fill" id="report-meter"></span></span>
+              <span class="score-card__summary" id="report-summary"></span>
+            </div>
+
+            <div class="metrics" id="report-metrics" data-i18n-aria="report.metrics"></div>
+
+            <h3 class="report-h" data-i18n="report.notes"></h3>
+            <ul class="bullets" id="report-notes"></ul>
+
+            <h3 class="report-h" data-i18n="report.recs"></h3>
+            <ul class="bullets" id="report-recs"></ul>
+
+            <footer class="report-meta">
+              <span><span data-i18n="report.id"></span>: <bdi id="report-id"></bdi></span>
+              <span><span data-i18n="report.date"></span>: <bdi id="report-date"></bdi></span>
+            </footer>
+          </article>
+
+          <div class="actions">
+            <button class="btn btn--outline" type="button" data-action="print">
+              <img src="assets/icons/print.svg" alt="" width="20" height="20"><span data-i18n="report.print"></span>
+            </button>
+            <button class="btn btn--outline" type="button" data-action="share">
+              <img src="assets/icons/share.svg" alt="" width="20" height="20"><span data-i18n="report.share"></span>
+            </button>
+          </div>
+          <button class="btn btn--primary btn--block btn--lg" type="button" data-action="save">
+            <img src="assets/icons/save.svg" alt="" width="20" height="20"><span data-i18n="report.save"></span>
+          </button>
+          <button class="link-btn link-btn--center" type="button" data-goto="upload" data-i18n="report.new"></button>
+          <p class="disclaimer" data-i18n="report.disclaimer"></p>
+        </section>
+
+        <footer class="app-footer" id="app-footer"></footer>
+      </div>
+
+      <!-- Analysis overlay -->
+      <div class="overlay" id="analyzing" aria-live="polite" hidden>
+        <div class="overlay__box">
+          <div class="scanner"><img id="scan-img" alt=""><span class="scanner__line"></span></div>
+          <h3 data-i18n="analyzing.title"></h3>
+          <ol class="steps" id="analyzing-steps">
+            <li data-i18n="analyzing.s1"></li>
+            <li data-i18n="analyzing.s2"></li>
+            <li data-i18n="analyzing.s3"></li>
+            <li data-i18n="analyzing.s4"></li>
+          </ol>
+        </div>
+      </div>
+
+      <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+      <span class="device__home-bar" aria-hidden="true"></span>
+    </div>
+  </div>
+
+  <!-- Plain ordered scripts (no bundler) so the app also opens from disk -->
+  <script src="js/generated/locales.js"></script>
+  <script src="js/utils/dom.js"></script>
+  <script src="js/utils/format.js"></script>
+  <script src="js/utils/image.js"></script>
+  <script src="js/i18n.js"></script>
+  <script src="js/router.js"></script>
+  <script src="js/services/storage.js"></script>
+  <script src="js/services/auth.js"></script>
+  <script src="js/services/image-metrics.js"></script>
+  <script src="js/services/analysis.js"></script>
+  <script src="js/services/sample-results.js"></script>
+  <script src="js/services/pwa.js"></script>
+  <script src="js/ui/toast.js"></script>
+  <script src="js/ui/analysis-overlay.js"></script>
+  <script src="js/ui/slide-to-start.js"></script>
+  <script src="js/ui/install-button.js"></script>
+  <script src="js/ui/common-actions.js"></script>
+  <script src="js/screens/splash.js"></script>
+  <script src="js/screens/login.js"></script>
+  <script src="js/screens/about.js"></script>
+  <script src="js/screens/upload.js"></script>
+  <script src="js/screens/report.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

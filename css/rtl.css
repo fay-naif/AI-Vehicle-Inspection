@@ -1,0 +1,22 @@
+/* ==========================================================
+   Direction-specific rules (Arabic RTL / English LTR)
+   Most components use logical properties, so only a few
+   tweaks live here.
+   ========================================================== */
+
+/* Arabic text must never be letter-spaced */
+[dir="rtl"] body,
+[dir="rtl"] .ai-badge {
+  letter-spacing: 0;
+}
+
+/* English headings read slightly tighter */
+[dir="ltr"] .screen-title {
+  letter-spacing: -0.2px;
+}
+
+/* Follow the finger while dragging the start knob */
+.slide-start.is-dragging .slide-start__knob,
+.slide-start.is-dragging .slide-start__fill {
+  transition: none;
+}

@@ -1,0 +1,16 @@
+/* ==========================================================
+   Cards
+   ========================================================== */
+
+.card {
+  padding: 18px;
+  border-radius: var(--radius-lg);
+  background: var(--surface);
+  border: 1px solid var(--border);
+}
+
+.card--text p {
+  color: #c8d2e8;
+  font-size: 15px;
+  line-height: 1.9;
+}

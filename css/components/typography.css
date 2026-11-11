@@ -1,0 +1,106 @@
+/* ==========================================================
+   Typography, logo and badges
+   ========================================================== */
+
+.brand-title {
+  font-size: 46px;
+  font-weight: 700;
+  line-height: 1.1;
+  direction: ltr;
+  background: linear-gradient(90deg, #ffffff 0%, #9cc3ff 55%, #2f7bff 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.screen-title {
+  font-size: 24px;
+  font-weight: 700;
+}
+
+.lead {
+  max-width: 320px;
+  color: #c8d2e8;
+  font-size: 17px;
+}
+
+.muted {
+  color: var(--muted);
+  font-size: 14px;
+}
+
+/* Logo / badges */
+.logo {
+  border-radius: 12px;
+  box-shadow: var(--glow);
+}
+
+.ai-badge {
+  display: inline-grid;
+  place-items: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 11px;
+  background: linear-gradient(135deg, #5aa2ff, var(--primary-2));
+  font-weight: 700;
+  font-size: 14px;
+  letter-spacing: 0.5px;
+  box-shadow: var(--glow);
+}
+
+.lang-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 14px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  font-size: 14px;
+  font-weight: 600;
+  transition: transform 0.12s ease, filter 0.12s ease;
+}
+
+.lang-btn--accent {
+  border-color: rgba(110, 166, 255, 0.45);
+  background: var(--primary-soft);
+  color: #cfe0ff;
+}
+
+.lang-btn:active,
+.icon-btn:active {
+  transform: scale(0.94);
+  filter: brightness(1.15);
+}
+
+.icon-btn {
+  display: inline-grid;
+  place-items: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 11px;
+  border: 1px solid var(--border);
+  background: var(--surface-2);
+  transition: transform 0.12s ease, filter 0.12s ease;
+}
+
+.pill {
+  align-self: flex-start;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 14px;
+  border-radius: 999px;
+  background: var(--primary-soft);
+  color: #9cc3ff;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.pill__dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--primary);
+  box-shadow: 0 0 0 4px rgba(47, 123, 255, 0.25);
+}

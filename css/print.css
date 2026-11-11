@@ -1,0 +1,59 @@
+/* Print only the report card, on white paper */
+body {
+  background: #fff;
+  color: #111;
+}
+
+.app {
+  max-width: none;
+  padding: 0;
+}
+
+/* Drop the phone frame on paper */
+.device,
+.device__screen {
+  all: unset !important;
+  display: block !important;
+}
+
+.device__button,
+.device__status,
+.device__home-bar {
+  display: none !important;
+}
+
+.screen,
+.topbar,
+.actions,
+.btn,
+.link-btn,
+.app-footer,
+.overlay,
+.toast {
+  display: none !important;
+}
+
+.screen--report.is-active {
+  display: block !important;
+}
+
+.screen--report .screen-title,
+.screen--report > .muted,
+.screen--report .disclaimer {
+  display: block !important;
+  color: #111;
+}
+
+.report-card,
+.score-card,
+.metric {
+  background: #fff !important;
+  border: 1px solid #ccd3e0 !important;
+  color: #111;
+}
+
+.bullets li,
+.score-card__summary,
+.muted {
+  color: #333 !important;
+}

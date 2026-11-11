@@ -1,0 +1,117 @@
+/* ==========================================================
+   Layout: app shell and screens
+   ========================================================== */
+
+.app {
+  width: 100%;
+  max-width: 480px;
+  min-height: 100vh;
+  min-height: 100dvh;
+  margin: 0 auto;
+  /* extra room for the notch / home indicator when installed */
+  padding: calc(20px + var(--safe-top)) 20px calc(28px + var(--safe-bottom));
+  display: flex;
+  flex-direction: column;
+}
+
+.screen {
+  /* new screens slide in from the reading end; going back reverses it */
+  --enter-from: 28px;
+  display: none;
+  flex-direction: column;
+  gap: 16px;
+  flex: 1;
+}
+
+.screen.is-active {
+  display: flex;
+  animation: screen-in 0.32s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+[dir="rtl"] .screen {
+  --enter-from: -28px;
+}
+
+.app.is-going-back .screen {
+  --enter-from: -28px;
+}
+
+[dir="rtl"] .app.is-going-back .screen {
+  --enter-from: 28px;
+}
+
+@keyframes screen-in {
+  from {
+    opacity: 0;
+    transform: translateX(var(--enter-from));
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.screen-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.screen-top__end {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 14px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+}
+
+.topbar__home {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0;
+  background: none;
+  border: 0;
+  font-weight: 600;
+}
+
+.topbar__end {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Footer */
+.app-footer {
+  direction: ltr;
+  margin-top: 24px;
+  text-align: center;
+  font-size: 12px;
+  color: var(--muted);
+}
+
+/* Desktop: give the app a little more room and a framed look */
+@media (min-width: 900px) {
+  .app {
+    max-width: 560px;
+    padding-top: 36px;
+  }
+
+  .screen--about .feature-grid {
+    gap: 14px;
+  }
+}
+
+@media (max-width: 360px) {
+  .app {
+    padding: 16px 14px 24px;
+  }
+}

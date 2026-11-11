@@ -1,0 +1,14 @@
+{
+  "name": "ai-vehicle-inspection",
+  "version": "1.1.0",
+  "description": "Bilingual (Arabic / English) vehicle inspection web app \u2013 installable PWA, no backend.",
+  "author": "Fay Naif",
+  "license": "MIT",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build:locales": "node scripts/build-locales.mjs",
+    "start": "python3 -m http.server 8000",
+    "test": "node --test tests/*.test.mjs"
+  }
+}

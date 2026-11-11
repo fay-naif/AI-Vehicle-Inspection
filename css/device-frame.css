@@ -1,0 +1,215 @@
+/* ==========================================================
+   Device frame
+   On tablets and desktops the app is shown inside a phone,
+   so it looks the way it does on a real device. On phones
+   (500px and narrower), and when installed as an app, the
+   frame is skipped and the app fills the screen.
+   ========================================================== */
+
+.device__button,
+.device__status,
+.device__home-bar {
+  display: none;
+}
+
+@media (min-width: 501px) and (display-mode: browser) {
+  :root {
+    --device-w: 390px;
+    --device-h: 844px;
+    --bezel: 12px;
+    --device-radius: 60px;
+  }
+
+  body {
+    display: grid;
+    place-items: center;
+    min-height: 100vh;
+    padding: 24px;
+    overflow: hidden;
+    background:
+      radial-gradient(700px 520px at 18% 20%, rgba(47, 123, 255, 0.28), transparent 70%),
+      radial-gradient(640px 520px at 85% 85%, rgba(124, 58, 237, 0.18), transparent 70%),
+      linear-gradient(160deg, #0d1a38 0%, #050b1a 100%);
+  }
+
+  /* Phone body: titanium edge + black bezel */
+  .device {
+    position: relative;
+    width: calc(var(--device-w) + var(--bezel) * 2);
+    height: min(calc(var(--device-h) + var(--bezel) * 2), calc(100vh - 48px));
+    padding: var(--bezel);
+    border-radius: var(--device-radius);
+    background: #05070c;
+    box-shadow:
+      0 0 0 2px #3b4252,
+      0 0 0 4px #1b1f29,
+      0 0 0 5px #4a5163,
+      0 40px 80px rgba(0, 0, 0, 0.55),
+      0 10px 30px rgba(0, 0, 0, 0.4);
+  }
+
+  /* Side buttons */
+  .device__button {
+    display: block;
+    position: absolute;
+    width: 4px;
+    border-radius: 2px;
+    background: linear-gradient(90deg, #2a2f3b, #4a5163);
+  }
+
+  .device__button--action,
+  .device__button--vol-up,
+  .device__button--vol-down {
+    left: -8px;
+  }
+
+  .device__button--action {
+    top: 120px;
+    height: 32px;
+  }
+
+  .device__button--vol-up {
+    top: 180px;
+    height: 58px;
+  }
+
+  .device__button--vol-down {
+    top: 252px;
+    height: 58px;
+  }
+
+  .device__button--power {
+    right: -8px;
+    top: 200px;
+    height: 90px;
+    background: linear-gradient(90deg, #4a5163, #2a2f3b);
+  }
+
+  /* The screen. transform makes it the containing block for the
+     fixed overlay and toast, so they stay inside the phone. */
+  .device__screen {
+    position: relative;
+    height: 100%;
+    overflow: hidden;
+    border-radius: calc(var(--device-radius) - var(--bezel));
+    transform: translateZ(0);
+    background:
+      radial-gradient(500px 360px at 50% -10%, rgba(47, 123, 255, 0.22), transparent 70%),
+      radial-gradient(400px 300px at 100% 100%, rgba(29, 92, 240, 0.12), transparent 70%),
+      var(--bg-deep);
+  }
+
+
+  /* Status bar with the Dynamic Island */
+  .device__status {
+    position: absolute;
+    inset: 0 0 auto;
+    z-index: 40;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 50px;
+    padding: 0 30px 0 34px;
+    direction: ltr;
+    font-family: -apple-system, "SF Pro Text", "Segoe UI", sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+    color: #fff;
+    background: linear-gradient(var(--bg-deep) 60%, rgba(6, 14, 32, 0));
+  }
+
+  .device__island {
+    position: absolute;
+    top: 11px;
+    left: 50%;
+    width: 122px;
+    height: 34px;
+    border-radius: 20px;
+    background: #000;
+    transform: translateX(-50%);
+  }
+
+  .device__island::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    right: 14px;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 35% 35%, #2b3a5c, #0a0f1c 70%);
+    transform: translateY(-50%);
+  }
+
+  .device__icons {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .device__icons svg {
+    fill: #fff;
+  }
+
+  .device__battery {
+    position: relative;
+    width: 25px;
+    height: 12px;
+    padding: 1.5px;
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    border-radius: 4px;
+  }
+
+  .device__battery::after {
+    content: "";
+    position: absolute;
+    top: 3px;
+    right: -3.5px;
+    width: 2px;
+    height: 5px;
+    border-radius: 0 1px 1px 0;
+    background: rgba(255, 255, 255, 0.5);
+  }
+
+  .device__battery span {
+    display: block;
+    width: 80%;
+    height: 100%;
+    border-radius: 2px;
+    background: #fff;
+  }
+
+  /* Home indicator */
+  .device__home-bar {
+    display: block;
+    position: absolute;
+    bottom: 8px;
+    left: 50%;
+    z-index: 40;
+    width: 134px;
+    height: 5px;
+    transform: translateX(-50%);
+    border-radius: 3px;
+    background: rgba(255, 255, 255, 0.85);
+  }
+
+  /* The app scrolls inside the screen, under the status bar */
+  .app,
+  .app[class] {
+    max-width: none;
+    height: 100%;
+    min-height: 0;
+    padding: 54px 20px 40px;
+    overflow-x: hidden;
+    overflow-y: auto;
+    scrollbar-width: none;
+  }
+
+  .app::-webkit-scrollbar {
+    display: none;
+  }
+
+  .screen--about .feature-grid {
+    gap: 12px;
+  }
+}
